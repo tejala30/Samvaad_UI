@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bootstrap, from Twitter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="./css/bootstrap.css" rel="stylesheet">
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+    <style type="text/css">
+	path {
+        stroke: #000;
+        fill-opacity: .8;
+      }
+	  
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+    </style>
+    <link href="./css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="./js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="./ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="./ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="./ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="./ico/favicon.png">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">Samvaad</a>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span2">
+		  <div class="hero-unit">
+            <h5 align="center">Google Contacts</h5>
+            <ol>
+            <li>john.smith@gmail.com</li>
+            <li>jane.doe@gmail.com</li>
+            <li>david.matt@gmail.com</li>
+            <li>michell.jordon@gmail.com</li>
+            <li>jessica.parker@gmail.com</li>
+            <li>ruby.rails@gmail.com</li>
+            <li>hanna.montana@gmail.com</li>
+            <li>john.smith@gmail.com</li>
+            <li>jane.doe@gmail.com</li>
+            <li>david.matt@gmail.com</li>
+            <li>michell.jordon@gmail.com</li>
+            <li>jessica.parker@gmail.com</li>
+            <li>ruby.rails@gmail.com</li>
+            <li>hanna.montana@gmail.com</li>
+            </ol>
+          </div>
+        </div><!--/span-->
+        <div class="span8">
+          <div class="hero-unit">
+            <h4 align="center">Visualization</h4>
+          </div>
+        </div><!--/span-->
+        <div class="span2">
+          <div class="hero-unit">
+            <h5 align="center">Facebook Contacts</h5>
+            <ol>
+            <li>john.smith@facebook.com</li>
+            <li>jane.doe@facebook.com</li>
+            <li>david.matt@facebook.com</li>
+            <li>mike.jordon@facebook.com</li>
+            <li>jess.parker@facebook.com</li>
+            <li>ruby.rails@facebook.com</li>
+            <li>hanna.joy@facebook.com</li>
+            <li>john.smith@facebook.com</li>
+            <li>jane.doe@facebook.com</li>
+            <li>david.matt@facebook.com</li>
+            <li>mike.jordon@facebook.com</li>
+            <li>jess.parker@facebook.com</li>
+            <li>ruby.rails@facebook.com</li>
+            <li>hanna.joy@facebook.com</li>
+            </ol>
+          </div>
+        </div><!--/span-->
+      </div><!--/row-->
+
+<script>
+
+var width = 815,
+    height = 300;
+
+var m = 2, // number of series
+    n = 90; // number of values
+
+// Generate random data into five arrays.
+var data = d3.range(m).map(function() {
+  return d3.range(n).map(function() {
+    return Math.random() * 100 | 0;
+  });
+});
+
+var x = d3.scale.linear()
+    .domain([0, n - 1])
+    .range([0, width]);
+
+var y = d3.scale.ordinal()
+    .domain(d3.range(m))
+    .rangePoints([0, height], 1);
+	
+	
+var color = d3.scale.ordinal()
+    .range(["#98abc5", "#8a89a6"]);
+
+var area = d3.svg.area()
+    .interpolate("basis")
+    .x(function(d, i) { return x(i); })
+    .y0(function(d) { return -d / 2; })
+    .y1(function(d) { return d / 2; });
+
+var svg = d3.select("div.span8").select("div.hero-unit").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+
+svg.selectAll("path")
+    .data(data)
+    .enter().append("path")
+    .attr("transform", function(d, i) { return "translate(0," + y(i) + ")"; })
+    .style("fill", function(d, i) { return color(i); })
+    .attr("d", area);
+	
+	  	
+</script>
+    
+<hr>
+      <footer>
+        <p>&copy; Samvaad 2014</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./js/jquery.js"></script>
+    <script src="./js/bootstrap-transition.js"></script>
+    <script src="./js/bootstrap-alert.js"></script>
+    <script src="./js/bootstrap-modal.js"></script>
+    <script src="./js/bootstrap-dropdown.js"></script>
+    <script src="./js/bootstrap-scrollspy.js"></script>
+    <script src="./js/bootstrap-tab.js"></script>
+    <script src="./js/bootstrap-tooltip.js"></script>
+    <script src="./js/bootstrap-popover.js"></script>
+    <script src="./js/bootstrap-button.js"></script>
+    <script src="./js/bootstrap-collapse.js"></script>
+    <script src="./js/bootstrap-carousel.js"></script>
+    <script src="./js/bootstrap-typeahead.js"></script>
+
+  </body>
+</html>
